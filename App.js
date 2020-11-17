@@ -1,12 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Animated } from 'react-native';
 
 export default function App() {
+  const [largura, setLargura] = useState(new Animated.Value(0));
+  const [altura, setAltura] = useState(new Animated.Value(30));
+
+  Animated.sequence([
+    Animated.timing(
+      largura,
+      {
+        toValue: 420,
+        duration: 2000
+      }
+    ),
+    Animated.timing(
+      altura,
+      {
+        toValue: 500,
+        duration: 1000
+      }
+    )
+  ]).start();
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Animated.View style={{
+        width: largura,
+        height: altura,
+        backgroundColor: '#222',
+      }}>
+
+      </Animated.View>
     </View>
   );
 }
